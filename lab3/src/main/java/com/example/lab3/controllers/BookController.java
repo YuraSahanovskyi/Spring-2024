@@ -65,7 +65,7 @@ public class BookController {
         if (bookService.create(new Book(id, name, author, List.of(keywords.split(","))))) {
             return "redirect:/books";
         } else {
-            return "redirect:/books/admin?create-error";
+            return "redirect:/books/admin?message=create-error";
         }
     }
 
@@ -87,7 +87,7 @@ public class BookController {
                 return "redirect:/books/admin?update-error";
             }
         } else {
-            return "redirect:/books/admin?update-error";
+            return "redirect:/books/admin?message=update-error";
         }
     }
 
@@ -97,7 +97,7 @@ public class BookController {
         if (bookService.delete(id)) {
             return "redirect:/books";
         } else {
-            return "redirect:/books/admin?delete-error";
+            return "redirect:/books/admin?message=delete-error";
         }
     }
 }
