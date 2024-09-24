@@ -53,7 +53,7 @@ public class BookController {
         return "admin";
     }
 
-    @PostMapping("/books/admin")
+    @PostMapping("/books/admin/create")
     public String createBook(@RequestParam int id,
                              @RequestParam String name,
                              @RequestParam String author,

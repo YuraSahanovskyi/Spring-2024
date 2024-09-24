@@ -2,16 +2,16 @@ package com.example.lab3.services;
 
 import com.example.lab3.models.Book;
 import com.example.lab3.repositories.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class BookService {
-    private final BookRepository bookRepository;
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+    @Autowired
+    private  BookRepository bookRepository;
+
     public Collection<Book> getAllBooks() {
         return bookRepository.findAll();
     }
