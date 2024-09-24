@@ -3,11 +3,13 @@ package com.example.lab3.services;
 import com.example.lab3.models.Book;
 import com.example.lab3.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@Scope("prototype")
 public class BookService {
     @Autowired
     private  BookRepository bookRepository;

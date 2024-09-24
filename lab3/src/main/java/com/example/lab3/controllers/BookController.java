@@ -2,6 +2,7 @@ package com.example.lab3.controllers;
 
 import com.example.lab3.models.Book;
 import com.example.lab3.services.BookService;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -13,10 +14,10 @@ import java.util.Optional;
 @Controller
 public class BookController {
 
-    private final BookService bookService;
+    private final ObjectFactory<BookService> bookServiceFactory;
 
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
+    public BookController(ObjectFactory<BookService> bookServiceFactory) {
+        this.bookServiceFactory = bookServiceFactory;
     }
 
     @GetMapping("/books")
@@ -24,6 +25,7 @@ public class BookController {
                             @RequestParam(required = false) String name,
                             @RequestParam(required = false) String author,
                             @RequestParam(required = false) String keyword) {
+        BookService bookService = bookServiceFactory.getObject();
         Collection<Book> books;
         if (name != null && !name.isEmpty()) {
             books = bookService.findByName(name);
@@ -41,6 +43,7 @@ public class BookController {
     @GetMapping("/books/admin")
     public String adminPanel(Model model,
                              @RequestParam(required = false) String message) {
+        BookService bookService = bookServiceFactory.getObject();
         if (message != null) {
             switch (message) {
                 case "create-error" -> model.addAttribute("message", "Unable to create new book");
@@ -58,6 +61,7 @@ public class BookController {
                              @RequestParam String name,
                              @RequestParam String author,
                              @RequestParam String keywords) {
+        BookService bookService = bookServiceFactory.getObject();
         if (bookService.create(new Book(id, name, author, List.of(keywords.split(","))))) {
             return "redirect:/books";
         } else {
@@ -70,6 +74,7 @@ public class BookController {
                              @RequestParam(required = false) String name,
                              @RequestParam(required = false) String author,
                              @RequestParam(required = false) String keywords) {
+        BookService bookService = bookServiceFactory.getObject();
         Optional<Book> optionalBook = bookService.getAllBooks().stream().filter(book -> book.getId() == id).findFirst();
         if (optionalBook.isPresent()) {
             Book book = optionalBook.get();
@@ -88,6 +93,7 @@ public class BookController {
 
     @PostMapping("/books/admin/delete")
     public String deleteBook(@RequestParam int id) {
+        BookService bookService = bookServiceFactory.getObject();
         if (bookService.delete(id)) {
             return "redirect:/books";
         } else {
