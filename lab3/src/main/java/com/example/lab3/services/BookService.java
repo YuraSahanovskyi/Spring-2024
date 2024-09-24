@@ -42,7 +42,7 @@ public class BookService {
     public boolean delete(int id) {
            return bookRepository.remove(id);
     }
-    public boolean update(int id, String name, String newAuthor, Collection<String> newKeywords) {
-        return bookRepository.modify(id, name, newAuthor, newKeywords);
+    public boolean update(Book book) {
+        return bookRepository.modify(book);
     }
 }

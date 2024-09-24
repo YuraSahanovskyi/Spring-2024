@@ -36,19 +36,15 @@ public class BookRepository {
     }
 
 
-    public boolean modify(int id, String name, String newAuthor, Collection<String> newKeywords) {
-        Optional<Book> bookOptional = books.stream()
-                .filter(book -> book.getId() == id)
-                .findFirst();
-
-        if (bookOptional.isPresent()) {
-            Book book = bookOptional.get();
-            book.setName(name);
-            book.setAuthor(newAuthor);
-            book.setKeywords(newKeywords);
-            books.remove(book);
-            books.add(book);
-            return true;
+    public boolean modify(Book book) {
+        if(book!=null) {
+            Optional<Book> oldBook = books.stream().filter(bookInList -> bookInList.getId() == book.getId()).findFirst();
+            if(oldBook.isPresent()) {
+                books.remove(oldBook.get());
+                books.add(book);
+                return true;
+            }
+            return false;
         }
         return false;
     }
