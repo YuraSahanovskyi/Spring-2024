@@ -22,29 +22,29 @@
     <button type="submit">Create Book</button>
 </form>
 
-<!-- Update Book Form -->
-<!--<h2>Update Book</h2>-->
-<!--<form method="post" action="/books/admin">-->
-<!--    <input type="hidden" name="_method" value="put">-->
-<!--    <label for="update-id">Book ID:</label>-->
-<!--    <input type="number" id="update-id" name="id" required>-->
-<!--    <label for="update-name">New Name:</label>-->
-<!--    <input type="text" id="update-name" name="name">-->
-<!--    <label for="update-author">New Author:</label>-->
-<!--    <input type="text" id="update-author" name="author">-->
-<!--    <label for="update-keywords">New Keywords (comma-separated):</label>-->
-<!--    <input type="text" id="update-keywords" name="keywords">-->
-<!--    <button type="submit">Update Book</button>-->
-<!--</form>-->
+ Update Book Form
+<h2>Update Book</h2>
+<form method="post" action="/books/admin/update">
+    <input type="hidden" name="_method" value="put">
+    <label for="update-id">Book ID:</label>
+    <input type="number" id="update-id" name="id" required>
+    <label for="update-name">New Name:</label>
+    <input type="text" id="update-name" name="name">
+    <label for="update-author">New Author:</label>
+    <input type="text" id="update-author" name="author">
+    <label for="update-keywords">New Keywords (comma-separated):</label>
+    <input type="text" id="update-keywords" name="keywords">
+    <button type="submit">Update Book</button>
+</form>
 
-<!-- Delete Book Form -->
-<!--<h2>Delete Book</h2>-->
-<!--<form method="post" action="/books/admin">-->
-<!--    <input type="hidden" name="_method" value="delete">-->
-<!--    <label for="delete-id">Book ID:</label>-->
-<!--    <input type="number" id="delete-id" name="id" required>-->
-<!--    <button type="submit">Delete Book</button>-->
-<!--</form>-->
+ Delete Book Form
+<h2>Delete Book</h2>
+<form method="post" action="/books/admin/delete">
+    <input type="hidden" name="_method" value="delete">
+    <label for="delete-id">Book ID:</label>
+    <input type="number" id="delete-id" name="id" required>
+    <button type="submit">Delete Book</button>
+</form>
 
 <!-- Display Books -->
 <h2>All Books</h2>

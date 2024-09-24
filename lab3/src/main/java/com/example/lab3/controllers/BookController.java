@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -64,33 +65,33 @@ public class BookController {
         }
     }
 
-//    @PutMapping("/books/admin")
-//    public String modifyBook(@RequestParam int id,
-//                             @RequestParam(required = false) String name,
-//                             @RequestParam(required = false) String author,
-//                             @RequestParam(required = false) String keywords) {
-//        Optional<Book> optionalBook = bookService.getAllBooks().stream().filter(book -> book.getId() == id).findFirst();
-//        if (optionalBook.isPresent()) {
-//            Book book = optionalBook.get();
-//            if (bookService.update(id,
-//                    name != null ? name : book.getName(),
-//                    author != null ? author : book.getAuthor(),
-//                    keywords != null ? List.of(keywords.split(",")) : book.getKeywords())) {
-//                return "redirect:/books";
-//            } else {
-//                return "redirect:/books/admin?update-error";
-//            }
-//        } else {
-//            return "redirect:/books/admin?update-error";
-//        }
-//    }
-//
-//    @DeleteMapping("/books/admin")
-//    public String deleteBook(@RequestParam int id) {
-//        if (bookService.delete(id)) {
-//            return "redirect:/books";
-//        } else {
-//            return "redirect:/books/admin?delete-error";
-//        }
-//    }
+    @PostMapping("/books/admin/update")
+    public String modifyBook(@RequestParam int id,
+                             @RequestParam(required = false) String name,
+                             @RequestParam(required = false) String author,
+                             @RequestParam(required = false) String keywords) {
+        Optional<Book> optionalBook = bookService.getAllBooks().stream().filter(book -> book.getId() == id).findFirst();
+        if (optionalBook.isPresent()) {
+            Book book = optionalBook.get();
+            if (bookService.update(id,
+                    name != null ? name : book.getName(),
+                    author != null ? author : book.getAuthor(),
+                    keywords != null ? List.of(keywords.split(",")) : book.getKeywords())) {
+                return "redirect:/books";
+            } else {
+                return "redirect:/books/admin?update-error";
+            }
+        } else {
+            return "redirect:/books/admin?update-error";
+        }
+    }
+
+    @PostMapping("/books/admin/delete")
+    public String deleteBook(@RequestParam int id) {
+        if (bookService.delete(id)) {
+            return "redirect:/books";
+        } else {
+            return "redirect:/books/admin?delete-error";
+        }
+    }
 }

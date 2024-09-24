@@ -46,6 +46,8 @@ public class BookRepository {
             book.setName(name);
             book.setAuthor(newAuthor);
             book.setKeywords(newKeywords);
+            books.remove(book.getId());
+            books.add(book);
             return true;
         }
         return false;
