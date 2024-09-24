@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Books</title>
+</head>
+<body>
+<h1>Books</h1>
+<form method="get" action="/books">
+    <input type="text" name="name" placeholder="Search by name" />
+    <input type="text" name="author" placeholder="Search by author" />
+    <input type="text" name="keyword" placeholder="Search by keyword" />
+    <button type="submit">Search</button>
+</form>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Keywords</th>
+    </tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.getName()}">Name</td>
+        <td th:text="${book.getAuthor()}">Author</td>
+        <td th:text="${book.getKeywords()}">Keywords</td>
+    </tr>
+</table>
+</body>
+</html>
