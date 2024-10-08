@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+</head>
+<body>
+<h1>Admin Panel</h1>
+<h2 th:text="${message}"></h2>
+
+<!-- Create Book Form -->
+<h2>Create New Book</h2>
+<form method="post" action="/books/admin/create">
+    <label for="create-id">ID:</label>
+    <input type="number" id="create-id" name="id" required>
+    <label for="create-name">Name:</label>
+    <input type="text" id="create-name" name="name" required>
+    <label for="create-author">Author:</label>
+    <input type="text" id="create-author" name="author" required>
+    <label for="create-keywords">Keywords (comma-separated):</label>
+    <input type="text" id="create-keywords" name="keywords">
+    <button type="submit">Create Book</button>
+</form>
+
+<!-- Update Book Form-->
+<h2>Update Book</h2>
+<form method="post" action="/books/admin/update">
+    <input type="hidden" name="_method" value="put">
+    <label for="update-id">Book ID:</label>
+    <input type="number" id="update-id" name="id" required>
+    <label for="update-name">New Name:</label>
+    <input type="text" id="update-name" name="name">
+    <label for="update-author">New Author:</label>
+    <input type="text" id="update-author" name="author">
+    <label for="update-keywords">New Keywords (comma-separated):</label>
+    <input type="text" id="update-keywords" name="keywords">
+    <button type="submit">Update Book</button>
+</form>
+
+<!-- Delete Book Form-->
+<h2>Delete Book</h2>
+<form method="post" action="/books/admin/delete">
+    <input type="hidden" name="_method" value="delete">
+    <label for="delete-id">Book ID:</label>
+    <input type="number" id="delete-id" name="id" required>
+    <button type="submit">Delete Book</button>
+</form>
+
+<!-- Display Books -->
+<h2>All Books</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Keywords</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.keywords}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
