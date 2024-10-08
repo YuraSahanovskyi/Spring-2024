@@ -1,6 +1,7 @@
 package com.example.lab3.utils;
 
 import com.example.lab3.models.Book;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
