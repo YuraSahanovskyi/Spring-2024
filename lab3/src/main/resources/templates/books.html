@@ -11,7 +11,7 @@
     <input type="text" name="keyword" placeholder="Search by keyword" />
     <button type="submit">Search</button>
 </form>
-<table>
+<table th:unless="${books.isEmpty()}">
     <tr>
         <th>Name</th>
         <th>Author</th>
@@ -23,5 +23,6 @@
         <td th:text="${book.getKeywords()}">Keywords</td>
     </tr>
 </table>
+<h3 th:if="${books.isEmpty()}">There are no books available</h3>
 </body>
 </html>
