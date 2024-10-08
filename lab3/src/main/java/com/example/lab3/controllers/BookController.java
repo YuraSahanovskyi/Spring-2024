@@ -42,14 +42,7 @@ public class BookController {
     public String adminPanel(Model model,
                              @RequestParam(required = false) String message) {
         BookService bookService = bookServiceFactory.getObject();
-        if (message != null) {
-            switch (message) {
-                case "create-error" -> model.addAttribute("message", "Unable to create new book");
-                case "delete-error" -> model.addAttribute("message", "Unable to delete book");
-                case "update-error" -> model.addAttribute("message", "Unable to update book");
-                default -> model.addAttribute("message", message);
-            }
-        }
+        model.addAttribute("message",message);
         model.addAttribute("books", bookService.getAllBooks());
         return "admin";
     }

@@ -6,7 +6,12 @@
 </head>
 <body>
 <h1>Admin Panel</h1>
-<h2 th:text="${message}"></h2>
+<h2 th:switch="${message}">
+    <p th:case="'create-error'">Unable to create new book</p>
+    <p th:case="'delete-error'">Unable to delete book</p>
+    <p th:case="'update-error'">Unable to update book</p>
+    <p th:case="*"></p>
+</h2>
 
 <!-- Create Book Form -->
 <h2>Create New Book</h2>
