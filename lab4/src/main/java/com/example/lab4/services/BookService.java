@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 @Service
-@Scope("prototype")
 public class BookService {
     @Autowired
     private BookRepository bookRepository;
