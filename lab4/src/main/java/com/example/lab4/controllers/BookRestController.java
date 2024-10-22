@@ -7,13 +7,13 @@ import java.util.Collection;
 
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/books")
 public class BookRestController {
     private final BookService bookService;
     public BookRestController(BookService bookService) {
         this.bookService = bookService;
     }
-    @GetMapping("books")
+    @GetMapping()
     Collection<Book> books(@RequestParam(required = false) String name,
                      @RequestParam(required = false) String author,
                      @RequestParam(required = false) String keyword) {
@@ -29,18 +29,17 @@ public class BookRestController {
         }
         return books;
     }
-    @PostMapping("books")
+    @PostMapping()
     Book addBook(@RequestBody Book book) {
-        bookService.create(book);
-        return book;
+        return bookService.create(book);
     }
-    @PutMapping("book")
-    Book updateBook(@RequestBody Book book) {
-        bookService.update(book);
-        return book;
+    @PutMapping("/{id}")
+    Book updateBook(@PathVariable int id, @RequestBody Book book) {
+        book.setId(id);
+        return bookService.update(book);
     }
-    @DeleteMapping("books")
-    void deleteBook(@RequestBody Book book) {
-        bookService.delete(book.getId());
+    @DeleteMapping("/{id}")
+    void deleteBook(@PathVariable int id) {
+        bookService.delete(id);
     }
 }

@@ -1,10 +1,10 @@
 package com.example.lab4.services;
 
+import com.example.lab4.exeptions.BookNotValidException;
 import com.example.lab4.models.Book;
 import com.example.lab4.repositories.BookRepository;
 import com.example.lab4.utils.BookValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -43,21 +43,21 @@ public class BookService {
                 .toList();
     }
 
-    public boolean create(Book book) {
+    public Book create(Book book) {
         if (!bookValidator.isValid(book))
-            return false;
+            throw new BookNotValidException(book.toString());
 
         return bookRepository.save(book);
     }
 
-    public boolean delete(int id) {
-        return bookRepository.remove(id);
+    public void delete(int id) {
+        bookRepository.remove(id);
     }
 
-    public boolean update(Book book) {
-        if (!bookValidator.isValid(book))
-            return false;
-
+    public Book update(Book book) {
+        if (!bookValidator.isValid(book)) {
+            throw new BookNotValidException(book.toString());
+        }
         return bookRepository.modify(book);
     }
 

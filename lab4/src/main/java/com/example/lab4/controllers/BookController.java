@@ -47,33 +47,33 @@ public class BookController {
         return "admin";
     }
 
-    @PostMapping("/books/admin/create")
-    public String createBook(@ModelAttribute Book book) {
-        BookService bookService = bookServiceFactory.getObject();
-        if (bookService.create(book)) {
-            return "redirect:/books";
-        } else {
-            return "redirect:/books/admin?message=create-error";
-        }
-    }
+//    @PostMapping("/books/admin/create")
+//    public String createBook(@ModelAttribute Book book) {
+//        BookService bookService = bookServiceFactory.getObject();
+//        if (bookService.create(book)) {
+//            return "redirect:/books";
+//        } else {
+//            return "redirect:/books/admin?message=create-error";
+//        }
+//    }
 
-    @PostMapping("/books/admin/update")
-    public String modifyBook(@ModelAttribute Book book) {
-        BookService bookService = bookServiceFactory.getObject();
-        if (bookService.update(book)) {
-            return "redirect:/books";
-        } else {
-            return "redirect:/books/admin?message=update-error";
-        }
-    }
+//    @PostMapping("/books/admin/update")
+//    public String modifyBook(@ModelAttribute Book book) {
+//        BookService bookService = bookServiceFactory.getObject();
+//        if (bookService.update(book)) {
+//            return "redirect:/books";
+//        } else {
+//            return "redirect:/books/admin?message=update-error";
+//        }
+//    }
 
-    @PostMapping("/books/admin/delete")
-    public String deleteBook(@RequestParam int id) {
-        BookService bookService = bookServiceFactory.getObject();
-        if (bookService.delete(id)) {
-            return "redirect:/books";
-        } else {
-            return "redirect:/books/admin?message=delete-error";
-        }
-    }
+//    @PostMapping("/books/admin/delete")
+//    public String deleteBook(@RequestParam int id) {
+//        BookService bookService = bookServiceFactory.getObject();
+//        if (bookService.delete(id)) {
+//            return "redirect:/books";
+//        } else {
+//            return "redirect:/books/admin?message=delete-error";
+//        }
+//    }
 }

@@ -24,28 +24,30 @@ public class BookRepository {
         return books;
     }
 
-    public boolean save(Book book) {
+    public Book save(Book book) {
         if (books.stream().anyMatch(bookInList -> bookInList.getId() == book.getId())) {
-            return false;
+            throw new IllegalArgumentException("Book already exists");
         }
-        return books.add(book);
+        books.add(book);
+        return book;
     }
 
-    public boolean remove(int id) {
-        return books.removeIf(book -> book.getId() == id);
+    public void remove(int id) {
+        books.removeIf(book -> book.getId() == id);
     }
 
 
-    public boolean modify(Book book) {
-        if(book!=null) {
-            Optional<Book> oldBook = books.stream().filter(bookInList -> bookInList.getId() == book.getId()).findFirst();
-            if(oldBook.isPresent()) {
-                books.remove(oldBook.get());
-                books.add(book);
-                return true;
-            }
-            return false;
+    public Book modify(Book book) {
+        if (book == null) {
+            throw new IllegalArgumentException("Book cannot be null");
         }
-        return false;
+        Optional<Book> oldBook = books.stream().filter(bookInList -> bookInList.getId() == book.getId()).findFirst();
+        if(oldBook.isPresent()) {
+            books.remove(oldBook.get());
+            books.add(book);
+            return book;
+        } else {
+            throw new IllegalArgumentException("Book not found");
+        }
     }
 }
