@@ -15,19 +15,12 @@ public class BookRestController {
     }
     @GetMapping()
     Collection<Book> books(@RequestParam(required = false) String name,
-                     @RequestParam(required = false) String author,
-                     @RequestParam(required = false) String keyword) {
-        Collection<Book> books;
-        if (name != null && !name.isEmpty()) {
-            books = bookService.findByName(name);
-        } else if (author != null && !author.isEmpty()) {
-            books = bookService.findByAuthor(author);
-        } else if (keyword != null && !keyword.isEmpty()) {
-            books = bookService.findByKeyword(keyword);
-        } else {
-            books = bookService.getAllBooks();
-        }
-        return books;
+                           @RequestParam(required = false) String author,
+                           @RequestParam(required = false) String keyword,
+                           @RequestParam(required = false, defaultValue = "3") int size,
+                           @RequestParam(required = false, defaultValue = "0") int page) {
+        Collection<Book> books = bookService.getBooks(name, author, keyword);
+        return bookService.paginate(books, page, size);
     }
     @PostMapping()
     Book addBook(@RequestBody Book book) {
