@@ -2,6 +2,8 @@ package com.example.lab4.controllers;
 
 import com.example.lab4.models.Book;
 import com.example.lab4.services.BookService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
@@ -23,8 +25,8 @@ public class BookRestController {
         return bookService.paginate(books, page, size);
     }
     @PostMapping()
-    Book addBook(@RequestBody Book book) {
-        return bookService.create(book);
+    ResponseEntity<Book> addBook(@RequestBody Book book) {
+        return new ResponseEntity<>(bookService.create(book), HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
     Book updateBook(@PathVariable int id, @RequestBody Book book) {
@@ -32,7 +34,8 @@ public class BookRestController {
         return bookService.update(book);
     }
     @DeleteMapping("/{id}")
-    void deleteBook(@PathVariable int id) {
+    ResponseEntity<Void> deleteBook(@PathVariable int id) {
         bookService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
