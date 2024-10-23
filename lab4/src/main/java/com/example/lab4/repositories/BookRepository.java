@@ -1,5 +1,7 @@
 package com.example.lab4.repositories;
 
+import com.example.lab4.exeptions.BookAlreadyExistsException;
+import com.example.lab4.exeptions.BookNotFoundException;
 import com.example.lab4.models.Book;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +28,7 @@ public class BookRepository {
 
     public Book save(Book book) {
         if (books.stream().anyMatch(bookInList -> bookInList.getId() == book.getId())) {
-            throw new IllegalArgumentException("Book already exists");
+            throw new BookAlreadyExistsException(book.toString());
         }
         books.add(book);
         return book;
@@ -38,16 +40,13 @@ public class BookRepository {
 
 
     public Book modify(Book book) {
-        if (book == null) {
-            throw new IllegalArgumentException("Book cannot be null");
-        }
         Optional<Book> oldBook = books.stream().filter(bookInList -> bookInList.getId() == book.getId()).findFirst();
         if(oldBook.isPresent()) {
             books.remove(oldBook.get());
             books.add(book);
             return book;
         } else {
-            throw new IllegalArgumentException("Book not found");
+            throw new BookNotFoundException(String.valueOf(book.getId()));
         }
     }
 }
