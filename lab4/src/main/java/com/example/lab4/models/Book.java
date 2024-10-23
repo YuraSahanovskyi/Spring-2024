@@ -50,4 +50,18 @@ public class Book {
     public void setKeywords(Collection<String> keywords) {
         this.keywords = keywords;
     }
+
+    @Override
+    public String toString() {
+        return "Book: {" +
+                "id=" +
+                id +
+                ", name: " +
+                name +
+                ", author: " +
+                author +
+                ", keywords: " +
+                keywords.toString() +
+                "}";
+    }
 }
